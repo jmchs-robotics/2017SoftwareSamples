@@ -1,0 +1,14 @@
+This java project is intended as a sample and as a guide to introduce Java to people with little or no software experience.
+It is not exhaustive and is intended to supplement or guide a series of lessons given by an experienced programmer. The
+intended sequence was:
+
+1. SimpleHelloWorld.java
+2. HelloWorldVariables.java
+3. HelloWorldLoops.java
+4. HelloWorldMethods.java
+
+Comments about syntax were deliberately left from the code base because this is not intended to stand alone as a comprehensive
+lesson (also because Eclipse already does a lot in the way of avoiding syntax errors).
+
+Each class contains significant commenting designed to guide the reader through different elements of a program. Remember,
+software is hard to learn. Come to it with an open mind, and you will succeed!
