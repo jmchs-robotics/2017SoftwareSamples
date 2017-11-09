@@ -11,11 +11,11 @@ public class ScramblerRunner {
 		
 		s.print();
 		
-		Scrambler c = new Scrambler("I am so glad I didn't have to write all that code three times!");
+		Scrambler c = new Scrambler("I am so glad I didn't have to write all that code so many times!");
 		
 		c.print();
 		
-		Scrambler[] scramArr = {
+		Scrambler[] scramArr = { //An array of Scrambler objects, each of which contains an unscrambled and scrambled String.
 				new Scrambler("method"),
 				new Scrambler("variable"),
 				new Scrambler("loop"),
@@ -29,5 +29,11 @@ public class ScramblerRunner {
 		
 		//Like arrays, printing an object directly prints the memory location of the object. Not too useful...
 		System.out.println(s);
+		
+		
+		System.out.println();
+		//since the scramble method is static and public, it can be called from outside the scramble objects
+		//through the class hierarchy. These are like how the Math.___ methods can be invoked without Math objects
+		System.out.println(Scrambler.scramble("This is a static method invoked without creating an object!"));
 	}
 }

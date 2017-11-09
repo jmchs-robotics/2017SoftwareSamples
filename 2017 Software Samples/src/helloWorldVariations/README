@@ -12,3 +12,52 @@ lesson (also because Eclipse already does a lot in the way of avoiding syntax er
 
 Each class contains significant commenting designed to guide the reader through different elements of a program. Remember,
 software is hard to learn. Come to it with an open mind, and you will succeed!
+
+The second package contains some simple examples with objects and overridden constructors. It should be used as a springboard for
+explaining RobotBuilder. Many more object examples can be found online.
+
+The third package will contain simple robot examples, with my own comments added to the generated software. One will be created 
+from RobotBuilder, and one will be created using the sample created as a class through the menu in Eclipse.
+
+-----------------------------------------------------------------------------------------------------------
+GitHub
+
+Our team uses GitHub to store and share software during development and across years. Chances are you already know a bit about GitHub
+if you found this on our team's organization webpage, but here's a description of how to use GitHub with Eclipse anyway. There are
+two different starting points for using GitHub: "cloning" a project from GitHub, or creating one of your own and creating the
+Git Repository from it.
+
+Cloning a project is very easy. First, find the project you want to add to your Eclipse environment in GitHub. Copy the URL or 
+download the zip. Open Eclipse and select File -> Import -> Git -> Projects from Git. This will take you to a new screen 
+where you can choose either an existing local repository or from URL. If you downloaded the zip, select "Existing local repository,
+then on the new screen click "add" and then browse for the file. Eclipse will likely handle the rest. If you did not download the 
+zip, or have issues importing an existing file, select "from URL". Paste the cloning URL you found on the project's GitHub webpage
+into the appropriate box and finish. The project should be added to your workspace, and a tab may be added to the Eclipse GUI titled
+"Git Repositories". The project you cloned should show up there with a golden cylinder to the left of the project title, and a lot of
+extra baggage that Git uses to keep track of the files. From that GUI you can open and edit files as you normally would. What to do
+after you have made changes will be described below.
+
+If you have a project on Eclipse that you want to add to GitHub, alt-click on the project to bring up the menu and select 
+Team -> Share Project. Create a repository for the project and make sure it is in the appropriate GitHub folder if you use both Eclipse
+and GitHub Desktop.
+
+Once you have made changes to a file that are not yet saved to GitHub (or a brand new repository), commit the files. To commit in
+Eclipse, alt-click on the project folder and select Team -> Commit (notice that the Team selection looks significantly different).
+This should open the Git Staging tab, with a list of unstaged and staged changes. Move the files you want to commit to staged changes
+by selecting them, then dragging them or alt-clicking on them and selecting "add to index". Click into the "Commit Message" box and
+type a very descriptive message in the format:
+
+Descriptive, One-Line Title
+
+Message body of several lines sharing what I did to edit the 
+files and why I made those changes. This should be enough
+detail so a person familiar with the code can understand
+roughly what you have done without needing to peruse the code
+files individually to analyze your changes.
+
+Once you have a satisfactory message, click "Commit and Push". The wizard will walk you through the next steps, if GitHub needs any
+(such as you signing in or adding your new project to an organization), and your project will be pushed to the website. The initial
+commit may fail on school wifi - if it does, simply use the website interface. Eclipse has already made your project into a repository.
+
+That pretty much covers it! I did not describe the use of the GitHub Desktop application because it should be fairly self explanatory
+ - and if it isn't, there's always Google!

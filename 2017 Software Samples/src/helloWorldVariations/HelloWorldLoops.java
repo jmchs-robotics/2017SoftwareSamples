@@ -32,7 +32,7 @@ public class HelloWorldLoops { //and Booleans
 		
 		System.out.println(); //line break to make reading the output easy
 		
-		for(i = 0; i < 10; i ++) {
+		for(i = 0; i < 10; i ++) { //the ++ in the for loop parameters means "increment by one". Similarly, -- is decrement by one.
 			System.out.println((char)(i + 64)); //this is a good example of casting making outputs weird.
 		}
 		
@@ -130,5 +130,10 @@ public class HelloWorldLoops { //and Booleans
 		for (i = 0; i < myFace.length; i ++) { //note that this is not i <= myFace.length - try it, and see what happens!
 			System.out.println(myFace[i]); //here is how you reference a specific in an array.
 		}
+		
+		//Note that system.out.println(type[] array) will print the resource location in the Java VM.
+		//This means that passing arrays passes the memory location, and to print an array you need
+		//a loop.
+		System.out.println(myFace);
 	}
 }

@@ -34,7 +34,7 @@ public class Scrambler {
 		//people who come to read it what the intention is.
 		
 		unscrambled = "You used the default constructor";
-		scrambled = this.scramble(); //use this to tell the program that you are using a method from this object.
+		scrambled = this.scramble(unscrambled); //use this to tell the program that you are using a method from this object.
 	}
 	
 	/**
@@ -48,11 +48,35 @@ public class Scrambler {
 		//appropriate variable.
 		
 		unscrambled = word;
-		scrambled = this.scramble(); //note that this line is the same as in the default constructor.
+		scrambled = this.scramble(unscrambled); //note that this line is the same as in the default constructor.
 	}
 	
-	private String scramble() {
-		char[] scramble = unscrambled.toCharArray(); //make a char array because they are easy to work with.
+	/**
+	 * Constructor for encoding words. With a ShiftCode type, the offset defines how many alphabet slots to
+	 * shift each letter right. With decode type, the offset defines how many alphabet slots to shift each
+	 * letter left. 
+	 * @param type
+	 * @param scrambledWord
+	 * @param offset
+	 */
+	Scrambler(ScrambleType type, String word, int offset){
+		switch(type) {
+		case Random:
+			unscrambled = word;
+			scrambled = scramble(unscrambled);
+			break;
+		case Decode:
+			scrambled = word;
+			unscrambled = encode(-offset,scrambled);
+			break;
+		case ShiftCode:
+			unscrambled = word;
+			scrambled = encode(offset,scrambled);
+		}
+	}
+	
+	static public String scramble(String word) {
+		char[] scramble = word.toCharArray(); //make a char array because they are easy to work with.
 		
 		for(int i = 0; i < scramble.length/2 + 1; i ++) {
 			//set a int that maps a first half character to the second half of the word.
@@ -64,6 +88,16 @@ public class Scrambler {
 		}
 		
 		return new String(scramble); //Since Strings are objects, they were created to accept char[] in a constructor and make it a string!
+	}
+	
+	private String encode(int offset, String word) { //shift each character by the offset. Can encode or decode letter-shifting problems.
+		char[] encoded = word.toCharArray();
+		
+		for(int i = 0; i < encoded.length; i ++) {
+			encoded[i] += offset; //remember that you can add ints to chars? Here's your chance to see it in action!
+		}
+		
+		return new String(encoded);
 	}
 	
 	/**
