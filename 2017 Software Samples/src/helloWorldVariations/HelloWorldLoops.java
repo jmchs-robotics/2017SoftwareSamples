@@ -110,7 +110,7 @@ public class HelloWorldLoops { //and Booleans
 		//They are usually manipulated through loops. For example, an array can make graphics:
 		
 		String[] happyFace = {
-				"                                   ",
+				"                                   ", //this is an "element" in the array happyFace
 				"                                   ",
 				"        -                –         ",
 				"                                   ",

@@ -4,5 +4,5 @@ package wordScramblerObjectSample;
 public enum ScrambleType {
 	Random,
 	ShiftCode,
-	Decode;
+	Decode
 }

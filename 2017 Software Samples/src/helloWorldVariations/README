@@ -49,8 +49,8 @@ type a very descriptive message in the format:
 
 Descriptive, One-Line Title
 
-Message body of several lines sharing what I did to edit the 
-files and why I made those changes. This should be enough
+Message body of several lines sharing what I (you) did to edit 
+the files and why I made those changes. This should be enough
 detail so a person familiar with the code can understand
 roughly what you have done without needing to peruse the code
 files individually to analyze your changes.
