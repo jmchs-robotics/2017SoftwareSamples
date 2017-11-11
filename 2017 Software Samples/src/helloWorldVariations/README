@@ -19,7 +19,7 @@ explaining RobotBuilder. Many more object examples can be found online.
 The third package will contain simple robot examples, with my own comments added to the generated software. One will be created 
 from RobotBuilder, and one will be created using the sample created as a class through the menu in Eclipse.
 
------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
 GitHub
 
 Our team uses GitHub to store and share software during development and across years. Chances are you already know a bit about GitHub
@@ -58,6 +58,57 @@ files individually to analyze your changes.
 Once you have a satisfactory message, click "Commit and Push". The wizard will walk you through the next steps, if GitHub needs any
 (such as you signing in or adding your new project to an organization), and your project will be pushed to the website. The initial
 commit may fail on school wifi - if it does, simply use the website interface. Eclipse has already made your project into a repository.
+
+There is one thing you must never do when working with GitHub, and that is edit the same file as someone else between commits. Doing
+that creates database conflicts that usually end in one file or another being completely overwritten by another. To avoid that, we will
+assign each person specific files to work on rather than giving each of you free reign across the software. It isn't because we don't 
+trust you, it's because we have to work with GitHub!
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+Robot Projects
+
+Because of the nature of projects using WPI, it is more trouble than it is worth to try cramming it all into this Software Samples
+project folder. Creating a Robot is relatively simple - use RobotBuilder if you have the plugin for Eclipse, or File -> New -> Other
+-> WPI Robot Java Development -> Command Based Robot. We will briefly describe the other types of robot architectures in the software
+camp, but will not go in-depth because Command Based Robot architecture is difficult enough without any distractions.
+
+Command Based Robot architecture is conceptually relatively simple. First, there are the Robot, RobotMap, and OI classes that handle, with
+much background software in the libraries, sequence of events, declaring everything in the robot, and user input respectively. Subsystem
+classes are objects that contain all methods that govern actuation of physical robot components but - and this is probably the most
+important concept - don't actually cause any movement. That privilege is taken by Commands, classes of objects that, believe it or not,
+command subsystems to actuate mechanisms on the robot. Most commands will be triggered by events such as button presses, others will be
+in Command Groups for sequential or pseudo-parallel operation, still others will be "default commands" inside the Robot class or any of
+the Subsystem classes that are continually used while the robot is operational.
+
+The life cycle of a command is essentially the same regardless of what triggered it. On triggering, it is added to the event queue for
+the next iteration of the robot loop (hidden in the libraries somewhere between the main method and the classes we can see and easily
+edit). On the next pass of the robot loop, it calls the "initialize()" method of the command and moves on. On the third iteration since
+the command was triggered, the "execute()" method is called, immediately followed by "isFinished()". If isFinished returns true, the 
+command will be marked for removal on the next loop after calling "end()". Otherwise, the "execute()" and "isFinished()" methods will
+continue to be called until "isFinished()" returns true or the robot is disabled or Emergency Stopped (E-stopped, in FRC slang). The 
+command could be canceled at any time in the life cycle described above if it is interrupted - that is, if a different command that has
+the same "requires(Subsystem subsystem)" line is triggered. In the event of interruption, the "interrupted()" method is called, which
+should generally call "end()" itself (but doesn't by default). Remember that although this seems long, the robot executes its loop
+extremely quickly. You won't be able to notice the lag between triggering and execute-isFinished except in extraordinary circumstances.
+
+Default commands are a bit special, in that their "isFinished()" method should always return false. They must always require the same
+subsystem that they are the default command for, because the only way they should end is by interruption. Once the interrupting command 
+ends,the default command picks right back up where it left off: "execute()", "isFinished()". A good example of a command that is best 
+default is the command that dictates user-operated (teleop) driving of the robot. This can be the default teleop (called from Robot) or 
+the default DriveTrain command, but either way, it should be the default command for moving the DriveTrain. The reasoning is simple: you
+want to have control of the robot all the time, but you don't want your signals to be mixed in with any automated driving commands that
+might be called during teleop mode. Therefore, it must be a command, interruptible by nature to cut off driver control to let the
+computer handle the robot, and it must also be default, to automatically reinstate itself when the computer finishes autonomously running
+the DriveTrain.
+
+Writing the software for a robot using the Command Based architecture requires a lot of planning. Prematurely creating classes for
+commands and subsystems can create extra work when something inevitably changes in the hardware of the robot that makes one or more of
+the classes become insufficient (requiring much manual creation of actuator objects), or, worse, overlap. RobotBuilder is an extremely
+useful tool in the planning phase of the robot, as it nicely structures the components and generates the OI and RobotMap classes for
+you, both of which can become extremely tedious on more complex robots. However, it flags as development forges ahead, often overwriting
+good code mistakenly written between the auto-generated markers. This, as you can imagine, creates many avoidable bugs in the software
+that are made all the more annoying when GitHub decides to get involved. Instead of using RobotBuilder mid-season, I recommend you
+become comfortable with creating new Commands from a template "NullCommand" that we keep in the robot code as a spaceholder for buttons.
 
 That pretty much covers it! I did not describe the use of the GitHub Desktop application because it should be fairly self explanatory
  - and if it isn't, there's always Google!
